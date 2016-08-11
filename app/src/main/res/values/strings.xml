@@ -1,0 +1,21 @@
+<resources>
+  <string name="app_name">ArctouchCallenge</string>
+  <string name="name_example">AGRONÔMICA VIA MAURO RAMOS</string>
+  <string name="timestamp_example">2012-07-23</string>
+  <string name="null_response">Nenhum retorno recebido</string>
+  <string name="search_hint">Pesquisar</string>
+  <string name="search">Pesquisar</string>
+  <string name="routes_title">Rotas</string>
+  <string name="map_title">Mapa</string>
+  <string name="shortname_example">120</string>
+  <string name="title_activity_maps">Map</string>
+  <string name="title_example">Avenida tal tal tal</string>
+  <string name="load_error">Erro ao carregar informações, tente novamente</string>
+  <string name="details">Detalhes</string>
+  <string name="large_text">Exemplo de detail</string>
+  <string name="example_details">Detalhes</string>
+  <string name="example_title">Titulo</string>
+  <string name="weekday">Dia da semana</string>
+  <string name="saturday">Sábado</string>
+  <string name="sunday">Domingo</string>
+</resources>
