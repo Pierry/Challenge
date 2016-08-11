@@ -26,21 +26,21 @@ import org.androidannotations.annotations.UiThread;
 
   @Bean NotifyHelper notifyHelper;
 
-  SupportMapFragment mSupportMapFragment;
+  SupportMapFragment supportMapFragment;
 
   private GoogleMap mMap;
 
   @AfterViews void init() {
-    mSupportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-    if (mSupportMapFragment == null) {
+    supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+    if (supportMapFragment == null) {
       FragmentManager fragmentManager = getFragmentManager();
       FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-      mSupportMapFragment = SupportMapFragment.newInstance();
-      fragmentTransaction.replace(R.id.map, mSupportMapFragment).commit();
+      supportMapFragment = SupportMapFragment.newInstance();
+      fragmentTransaction.replace(R.id.map, supportMapFragment).commit();
     }
 
-    if (mSupportMapFragment != null) {
-      mSupportMapFragment.getMapAsync(this);
+    if (supportMapFragment != null) {
+      supportMapFragment.getMapAsync(this);
     }
   }
 

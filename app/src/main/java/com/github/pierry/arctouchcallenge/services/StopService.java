@@ -1,6 +1,8 @@
 package com.github.pierry.arctouchcallenge.services;
 
+import android.content.Context;
 import com.activeandroid.ActiveAndroid;
+import com.github.pierry.arctouchcallenge.DetailsActivity_;
 import com.github.pierry.arctouchcallenge.api.DepartureApi;
 import com.github.pierry.arctouchcallenge.api.contracts.IDepartureApi;
 import com.github.pierry.arctouchcallenge.domain.Stop;
@@ -31,7 +33,7 @@ import org.androidannotations.annotations.EBean;
     return stops;
   }
 
-  @Override public void saveStops(List<Stop> stops, long routeId) {
+  @Override public void saveStops(Context context, List<Stop> stops, long routeId) {
     ActiveAndroid.beginTransaction();
     for (Stop s : stops) {
       Stop stop = stopRepository.getById(s.getStopId());
@@ -40,5 +42,9 @@ import org.androidannotations.annotations.EBean;
       }
     }
     ActiveAndroid.endTransaction();
+    if (context instanceof DetailsActivity_) {
+      DetailsActivity_ act = (DetailsActivity_) context;
+      act.completed(stops);
+    }
   }
 }

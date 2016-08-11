@@ -12,8 +12,25 @@ import org.androidannotations.annotations.EBean;
     return new Select().from(Departure.class).execute();
   }
 
-  @Override public Departure getById(long id) {
-    return new Select().from(Departure.class).where("DepartureId=" + id).executeSingle();
+  @Override public List<Departure> getWeekdayByRouteId(long id) {
+    return new Select().from(Departure.class)
+        .where("RouteId=" + id)
+        .and("Calendar='WEEKDAY'")
+        .execute();
+  }
+
+  @Override public List<Departure> getSaturdayByRouteId(long id) {
+    return new Select().from(Departure.class)
+        .where("RouteId=" + id)
+        .and("Calendar='SATURDAY'")
+        .execute();
+  }
+
+  @Override public List<Departure> getSundayByRouteId(long id) {
+    return new Select().from(Departure.class)
+        .where("RouteId=" + id)
+        .and("Calendar='SUNDAY'")
+        .execute();
   }
 
   @Override public long create(Departure departure) {

@@ -43,7 +43,7 @@ import org.androidannotations.annotations.RootContext;
               case 200:
                 List<Departure> departures =
                     departureService.deserializeDepartures(result.getResult());
-                departureService.saveDepartures(context, departures);
+                departureService.saveDepartures(departures, id);
                 break;
             }
           }

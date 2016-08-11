@@ -15,7 +15,9 @@
   <string name="large_text">Exemplo de detail</string>
   <string name="example_details">Detalhes</string>
   <string name="example_title">Titulo</string>
-  <string name="weekday">Dia da semana</string>
-  <string name="saturday">Sábado</string>
-  <string name="sunday">Domingo</string>
+  <string name="weekday">Normal</string>
+  <string name="saturday">Sab</string>
+  <string name="sunday">Dom</string>
+  <string name="title_dialog_fragment">Horários</string>
+  <string name="timetable">Horários</string>
 </resources>

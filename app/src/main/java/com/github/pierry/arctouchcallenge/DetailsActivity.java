@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +34,7 @@ import com.github.pierry.arctouchcallenge.ui.adapters.StopAdapter;
 import com.github.pierry.arctouchcallenge.ui.common.ExtrasAlias;
 import com.github.pierry.arctouchcallenge.ui.common.LoaderHelper;
 import com.github.pierry.arctouchcallenge.ui.common.NotifyHelper;
+import com.github.pierry.arctouchcallenge.ui.fragments.TimetableFragment;
 import com.github.pierry.fitloader.RotateLoading;
 import java.util.List;
 import org.androidannotations.annotations.AfterViews;
@@ -39,10 +42,12 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-@EActivity(R.layout.activity_details) public class DetailsActivity extends AppCompatActivity {
+@OptionsMenu(R.menu.route_menu) @EActivity(R.layout.activity_details) public class DetailsActivity
+    extends AppCompatActivity {
 
   @ViewById TextView title;
   @ViewById TextView date;
@@ -57,7 +62,6 @@ import org.androidannotations.annotations.ViewById;
   @Bean(StopApi.class) IStopApi stopApi;
   @Bean(DepartureApi.class) IDepartureApi departureApi;
   @Bean(StopService.class) IStopService stopService;
-  @Bean(StopRepository.class) IStopRepository stopRepository;
   @Bean StopAdapter stopAdapter;
   @Bean LoaderHelper loaderHelper;
 
@@ -117,13 +121,18 @@ import org.androidannotations.annotations.ViewById;
     recyclerView.setAdapter(stopAdapter);
   }
 
-  @Background public void completed() {
-    List<Stop> stops = stopRepository.getByRouteId(route.getId());
+  @Background public void completed(List<Stop> stops) {
     loaderHelper.hideLoader();
     adapter(stops);
   }
 
   @OptionsItem(android.R.id.home) void homeTap() {
     super.onBackPressed();
+  }
+
+  @OptionsItem(R.id.timetableAction) void timetabelTap() {
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    DialogFragment newFragment = TimetableFragment.newInstance(route.getId());
+    newFragment.show(getSupportFragmentManager(), "dialog");
   }
 }

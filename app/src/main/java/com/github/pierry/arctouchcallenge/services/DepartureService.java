@@ -28,14 +28,10 @@ import org.androidannotations.annotations.EBean;
     return departures;
   }
 
-  @Override public void saveDepartures(Context context, List<Departure> departures, int routeId) {
+  @Override public void saveDepartures(List<Departure> departures, long routeId) {
     for (Departure d : departures) {
-      d.setRouteId(routeId);
+      d.setRouteId((int) routeId);
       departureRepository.create(d);
-    }
-    if (context instanceof DetailsActivity_) {
-      DetailsActivity_ act = (DetailsActivity_) context;
-      act.completed();
     }
   }
 }

@@ -41,7 +41,8 @@ import org.androidannotations.annotations.RootContext;
         switch (statusCode) {
           case 200:
             List<Stop> stops = stopService.deserializeStops(result.getResult());
-            stopService.saveStops(stops, id);
+            stopService.saveStops(context, stops, id);
+            break;
         }
       }
     });

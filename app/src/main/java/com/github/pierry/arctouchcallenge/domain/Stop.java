@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
   @SerializedName("id") @Column(name = "StopId") long stopId;
   @Column(name = "Name") String name;
   @Column(name = "Sequence") int sequence;
-  @SerializedName("route_id") @Column(name = "RouteId") private String routeId;
+  @SerializedName("route_id") @Column(name = "RouteId") long routeId;
 
   public Stop() {
     super();
@@ -40,11 +40,11 @@ import com.google.gson.annotations.SerializedName;
     this.sequence = sequence;
   }
 
-  public String getRouteId() {
+  public long getRouteId() {
     return routeId;
   }
 
-  public void setRouteId(String routeId) {
+  public void setRouteId(long routeId) {
     this.routeId = routeId;
   }
 }

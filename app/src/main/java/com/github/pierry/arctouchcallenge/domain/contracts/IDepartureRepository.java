@@ -7,7 +7,11 @@ public interface IDepartureRepository {
 
   List<Departure> get();
 
-  Departure getById(long id);
+  List<Departure> getWeekdayByRouteId(long id);
+
+  List<Departure> getSaturdayByRouteId(long id);
+
+  List<Departure> getSundayByRouteId(long id);
 
   long create(Departure departure);
 }
