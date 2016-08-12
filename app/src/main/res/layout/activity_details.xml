@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/rt_white"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context=".DetailsActivity">
+
+  <include layout="@layout/toolbar"/>
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <com.github.pierry.fitloader.RotateLoading
+        android:id="@+id/rotateLoading"
+        android:layout_width="@dimen/rotate_loading"
+        android:visibility="gone"
+        android:layout_height="@dimen/rotate_loading"
+        app:loading_width="@dimen/rotate_loading_width"
+        android:background="@color/transparent_white"
+        android:layout_centerInParent="true"
+    />
+
+    <LinearLayout
+        android:id="@+id/body"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true"
+        android:layout_height="match_parent">>
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/recyclerView"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scrollbars="vertical"/>
+    </LinearLayout>
+
+  </RelativeLayout>
+</LinearLayout>
