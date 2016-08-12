@@ -48,3 +48,8 @@ Padrões e técnicas
 - Repository Pattern
 - Dependency Injection - IoC
 - SOLID
+
+Preview
+======
+
+![](https://raw.githubusercontent.com/Pierry/Challenge/arc-challenge/app/src/art/device-2016-08-12-102605.png)
