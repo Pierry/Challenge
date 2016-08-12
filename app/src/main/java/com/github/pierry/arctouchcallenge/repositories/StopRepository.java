@@ -1,5 +1,6 @@
 package com.github.pierry.arctouchcallenge.repositories;
 
+import android.util.Log;
 import com.activeandroid.query.Select;
 import com.github.pierry.arctouchcallenge.domain.Stop;
 import com.github.pierry.arctouchcallenge.domain.contracts.IStopRepository;
@@ -13,6 +14,9 @@ import org.androidannotations.annotations.EBean;
   }
 
   @Override public List<Stop> getByRouteId(long id) {
+    String log =
+        new Select().from(Stop.class).where("RouteId =" + id).orderBy("Sequence ASC").toSql();
+    Log.e("Log", log);
     return new Select().from(Stop.class).where("RouteId =" + id).orderBy("Sequence ASC").execute();
   }
 

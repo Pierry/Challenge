@@ -1,8 +1,5 @@
 package com.github.pierry.arctouchcallenge;
 
-import android.animation.Animator;
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,8 +8,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.ViewAnimationUtils;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,7 +18,6 @@ import com.github.pierry.arctouchcallenge.api.contracts.IDepartureApi;
 import com.github.pierry.arctouchcallenge.api.contracts.IRouteApi;
 import com.github.pierry.arctouchcallenge.api.contracts.IStopApi;
 import com.github.pierry.arctouchcallenge.common.DateHelper;
-import com.github.pierry.arctouchcallenge.domain.Departure;
 import com.github.pierry.arctouchcallenge.domain.Route;
 import com.github.pierry.arctouchcallenge.domain.Stop;
 import com.github.pierry.arctouchcallenge.domain.contracts.IStopRepository;
@@ -49,9 +43,6 @@ import org.androidannotations.annotations.ViewById;
 @OptionsMenu(R.menu.route_menu) @EActivity(R.layout.activity_details) public class DetailsActivity
     extends AppCompatActivity {
 
-  @ViewById TextView title;
-  @ViewById TextView date;
-  @ViewById RelativeLayout headerLayout;
   @ViewById Toolbar toolbar;
   @ViewById RecyclerView recyclerView;
   @ViewById LinearLayout body;
@@ -62,15 +53,13 @@ import org.androidannotations.annotations.ViewById;
   @Bean(StopApi.class) IStopApi stopApi;
   @Bean(DepartureApi.class) IDepartureApi departureApi;
   @Bean(StopService.class) IStopService stopService;
+  @Bean(StopRepository.class) IStopRepository stopRepository;
   @Bean StopAdapter stopAdapter;
   @Bean LoaderHelper loaderHelper;
 
   private Route route;
 
   @AfterViews void init() {
-    toolbar.setTitle(R.string.details);
-    setSupportActionBar(toolbar);
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     Bundle bundle = getIntent().getExtras();
     route = (Route) bundle.getSerializable(ExtrasAlias.ROUTE);
     if (route == null) {
@@ -78,30 +67,13 @@ import org.androidannotations.annotations.ViewById;
       super.onBackPressed();
       return;
     }
-    beginEnterTransition();
-    load();
+    toolbar.setSubtitle(route.getLongName());
+    toolbar.setTitle(DateHelper.date(route.getLastModifiedDate()));
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     loaderHelper.add(rotateLoading, body);
     loaderHelper.showLoader();
     recyclerViewConfig();
-  }
-
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP) @UiThread void beginEnterTransition() {
-    headerLayout.post(new Runnable() {
-      @Override public void run() {
-
-        Animator circularReveal =
-            ViewAnimationUtils.createCircularReveal(headerLayout, headerLayout.getWidth() / 2, 0, 0,
-                headerLayout.getWidth());
-        circularReveal.setInterpolator(new AccelerateInterpolator(1.5f));
-        circularReveal.setDuration(500);
-        circularReveal.start();
-      }
-    });
-  }
-
-  @UiThread void load() {
-    title.setText(route.getLongName());
-    date.setText(DateHelper.date(route.getLastModifiedDate()));
   }
 
   @UiThread void recyclerViewConfig() {

@@ -1,7 +1,5 @@
 package com.github.pierry.arctouchcallenge.domain;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import java.io.Serializable;
 
 public class Route implements Serializable {
