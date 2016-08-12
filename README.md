@@ -49,6 +49,11 @@ Padrões e técnicas
 - Dependency Injection - IoC
 - SOLID
 
+Download apk
+=====
+
+[v1.0](https://github.com/Pierry/Challenge/releases/tag/v1.0)
+
 Preview
 ======
 
